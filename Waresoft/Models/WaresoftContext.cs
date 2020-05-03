@@ -15,10 +15,11 @@ namespace Waresoft
         {
         }
 
-        public virtual DbSet<Comments> Comments { get; set; }
-        public virtual DbSet<Customers> Customers { get; set; }
-        public virtual DbSet<Developers> Developers { get; set; }
-        public virtual DbSet<Purchases> Purchases { get; set; }
+        public virtual DbSet<Comment> Comments { get; set; }
+        public virtual DbSet<Country> Countries { get; set; }
+        public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<Developer> Developers { get; set; }
+        public virtual DbSet<Purchase> Purchases { get; set; }
         public virtual DbSet<Software> Software { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -31,7 +32,7 @@ namespace Waresoft
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Comments>(entity =>
+            modelBuilder.Entity<Comment>(entity =>
             {
                 entity.Property(e => e.Id).HasColumnName("id");
 
@@ -55,7 +56,17 @@ namespace Waresoft
                     .HasConstraintName("FK_Comments_Software");
             });
 
-            modelBuilder.Entity<Customers>(entity =>
+            modelBuilder.Entity<Country>(entity =>
+            {
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasColumnName("name")
+                    .HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<Customer>(entity =>
             {
                 entity.Property(e => e.Id).HasColumnName("id");
 
@@ -76,22 +87,22 @@ namespace Waresoft
                     .HasMaxLength(50);
             });
 
-            modelBuilder.Entity<Developers>(entity =>
+            modelBuilder.Entity<Developer>(entity =>
             {
                 entity.Property(e => e.Id).HasColumnName("id");
-
-                entity.Property(e => e.Country)
-                    .IsRequired()
-                    .HasColumnName("country")
-                    .HasMaxLength(50);
 
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasColumnName("name")
                     .HasMaxLength(50);
+
+                entity.HasOne(d => d.Country)
+                    .WithMany(p => p.Developers)
+                    .HasForeignKey(d => d.CountryId)
+                    .HasConstraintName("FK_Developers_Countries");
             });
 
-            modelBuilder.Entity<Purchases>(entity =>
+            modelBuilder.Entity<Purchase>(entity =>
             {
                 entity.Property(e => e.Id).HasColumnName("id");
 
