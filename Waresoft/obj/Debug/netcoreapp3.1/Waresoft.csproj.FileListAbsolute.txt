@@ -165,6 +165,8 @@ D:\Женя\Студматериалы\2 КУРС\2 СЕМЕСТР\БД та І�
 D:\Женя\Студматериалы\2 КУРС\2 СЕМЕСТР\БД та ІС\Лаба 2\Waresoft\Waresoft\obj\Debug\netcoreapp3.1\Razor\Views\Developers\Index.cshtml.g.cs
 D:\Женя\Студматериалы\2 КУРС\2 СЕМЕСТР\БД та ІС\Лаба 2\Waresoft\Waresoft\obj\Debug\netcoreapp3.1\Razor\Views\Software\Create.cshtml.g.cs
 D:\Женя\Студматериалы\2 КУРС\2 СЕМЕСТР\БД та ІС\Лаба 2\Waresoft\Waresoft\obj\Debug\netcoreapp3.1\Razor\Views\Software\Delete.cshtml.g.cs
-D:\Женя\Студматериалы\2 КУРС\2 СЕМЕСТР\БД та ІС\Лаба 2\Waresoft\Waresoft\obj\Debug\netcoreapp3.1\Razor\Views\Software\Details.cshtml.g.cs
 D:\Женя\Студматериалы\2 КУРС\2 СЕМЕСТР\БД та ІС\Лаба 2\Waresoft\Waresoft\obj\Debug\netcoreapp3.1\Razor\Views\Software\Edit.cshtml.g.cs
 D:\Женя\Студматериалы\2 КУРС\2 СЕМЕСТР\БД та ІС\Лаба 2\Waresoft\Waresoft\obj\Debug\netcoreapp3.1\Razor\Views\Software\Index.cshtml.g.cs
+D:\Женя\Студматериалы\2 КУРС\2 СЕМЕСТР\БД та ІС\Лаба 2\Waresoft\Waresoft\obj\Debug\netcoreapp3.1\Razor\Views\Purchases\Purchase.cshtml.g.cs
+D:\Женя\Студматериалы\2 КУРС\2 СЕМЕСТР\БД та ІС\Лаба 2\Waresoft\Waresoft\obj\Debug\netcoreapp3.1\Razor\Views\Customers\Index.cshtml.g.cs
+D:\Женя\Студматериалы\2 КУРС\2 СЕМЕСТР\БД та ІС\Лаба 2\Waresoft\Waresoft\obj\Debug\netcoreapp3.1\Razor\Views\Purchases\Index.cshtml.g.cs

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Waresoft
 {
@@ -8,6 +9,8 @@ namespace Waresoft
         public int Id { get; set; }
         public int CustomerId { get; set; }
         public int SoftwareId { get; set; }
+
+        [Display(Name = "Дата покупки")]
         public DateTime Date { get; set; }
 
         public virtual Customer Customer { get; set; }

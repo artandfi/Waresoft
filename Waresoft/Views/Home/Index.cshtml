@@ -13,24 +13,32 @@
     </p>
 </form>
 
-<form method="get" asp-controller="Software" asp-action="Index">
+<form method="get" asp-controller="Software" asp-action="Index" asp-route-id="0">
     <p align="center">
         <input type="submit" class="btn btn-primary btn-lg" style="width:200px" value="Продукти" />
     </p>
 </form>
 
-<p align="center">
-    <button class="btn btn-primary btn-lg" style="width:200px">Покупці</button>
-</p>
+<form method="get" asp-controller="Customers" asp-action="Index" asp-route-id="0">
+    <p align="center">
+        <input type="submit" class="btn btn-primary btn-lg" style="width:200px" value="Покупці" />
+    </p>
+</form>
 
-<p align="center">
-    <button class="btn btn-primary btn-lg" style="width:200px">Замовлення</button>
-</p>
+<form method="get" asp-controller="Purchases" asp-action="Index" asp-route-id="0">
+    <p align="center">
+        <input type="submit" class="btn btn-primary btn-lg" style="width:200px" value="Покупки" />
+    </p>
+</form>
 
-<p align="center">
-    <button class="btn btn-primary btn-lg" style="width:200px">Запити</button>
-</p>
+<form method="get" asp-controller="Queries" asp-action="Index" asp-route-id="0">
+    <p align="center">
+        <input type="submit" class="btn btn-primary btn-lg" style="width:200px" value="Запити" />
+    </p>
+</form>
 
-<p align="center">
-    <button class="btn btn-primary btn-lg" style="width:200px">Довідка</button>
-</p>
+<form method="get" asp-controller="Help" asp-action="Index" asp-route-id="0">
+    <p align="center">
+        <input type="submit" class="btn btn-primary btn-lg" style="width:200px" value="Довідка" />
+    </p>
+</form>

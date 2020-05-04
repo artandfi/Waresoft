@@ -4,7 +4,15 @@
     ViewData["Title"] = "Продукти";
 }
 
-<h1>Продукти</h1>
+@if (ViewBag.DevId == 0)
+{
+    <h1>Продукти</h1>
+}
+else
+{
+    <h1>Продукти @ViewBag.Developer</h1>
+}
+
 
 <table class="table">
     <thead>
@@ -21,9 +29,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.Requirements)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Developer)
-            </th>
+            @if (ViewBag.DevId == 0)
+            {
+                <th>
+                    @Html.DisplayNameFor(model => model.Developer)
+                </th>
+            }
             <th></th>
         </tr>
     </thead>
@@ -45,17 +56,24 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Requirements)
                 </td>
+                @if (ViewBag.DevId == 0)
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Developer.Name)
+                    </td>
+                }
+                
                 <td>
-                    @Html.DisplayFor(modelItem => item.Developer.Name)
-                </td>
-                <td>
-                    <form asp-controller="Purchases" asp-action="Purchase" asp-route-id="@item.Id">
+                    <form method="get" asp-controller="Purchases" asp-action="Purchase">
+                        <input type="hidden" name="softwareId" value="@item.Id" />
+                        <input type="hidden" name="devId" value="@ViewBag.DevId" />
                         <p>
-                            <input type="submit" class="btn btn-success"  value="Придбати" style="width:100px" />
+                            <input type="submit" class="btn btn-success" value="Придбати" style="width:100px" />
                         </p>
                     </form>
                     <form method="get" asp-action="Edit" asp-route-id="@item.Id">
                         <p>
+                            <input type="hidden" name="devId" value="@ViewBag.DevId" />
                             <input type="submit" class="btn btn-warning" value="Редагувати" style="width:100px" />
                         </p>
                     </form>
@@ -95,7 +113,7 @@
 <table>
     <tr>
         <td>
-            <form method="get" asp-action="Create">
+            <form method="get" asp-action="Create" asp-route-id="@ViewBag.DevId">
                 <input type="submit" class="btn btn-success" value="Додати новий" />
             </form>
         </td>

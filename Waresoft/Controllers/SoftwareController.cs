@@ -11,6 +11,7 @@ namespace Waresoft.Controllers
 {
     public class SoftwareController : Controller
     {
+        private const string ERR_SOFT_EXISTS = "Такий продукт вже доданий";
         private readonly WaresoftContext _context;
 
         public SoftwareController(WaresoftContext context)
@@ -19,35 +20,30 @@ namespace Waresoft.Controllers
         }
 
         // GET: Software
-        public async Task<IActionResult> Index(int devId)
+        public async Task<IActionResult> Index(int id)
         {
-            var waresoftContext = _context.Software.Include(s => s.Developer);
-            return View(await waresoftContext.ToListAsync());
-        }
-
-        // GET: Software/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
+            List<Software> software;
+            ViewBag.DevId = id;
+            
+            if (id == 0)
             {
-                return NotFound();
+                software = await _context.Software.Include(s => s.Developer).ToListAsync();
             }
-
-            var software = await _context.Software
-                .Include(s => s.Developer)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (software == null)
+            else
             {
-                return NotFound();
+                ViewBag.Developer = _context.Developers.Find(id).Name;
+                software = await _context.Software.Where(s => s.DeveloperId == id).Include(s => s.Developer).ToListAsync();
             }
 
             return View(software);
         }
 
         // GET: Software/Create
-        public IActionResult Create()
+        public IActionResult Create(int id)
         {
-            ViewBag.DeveloperList = new SelectList(_context.Developers, "Id", "Name");
+            ViewBag.DeveloperList = id == 0 ?
+                new SelectList(_context.Developers, "Id", "Name") :
+                new SelectList(new List<Developer>() { _context.Developers.Find(id) });
             return View();
         }
 
@@ -56,20 +52,29 @@ namespace Waresoft.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Software software)
         {
+            bool duplicate = _context.Software.Any(s => s.DeveloperId == software.DeveloperId && s.Name.Equals(software.Name));
+
+            if (duplicate)
+            {
+                ModelState.AddModelError("Name", ERR_SOFT_EXISTS);
+            }
+
             if (ModelState.IsValid)
             {
                 _context.Add(software);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
             ViewBag.DeveloperList = new SelectList(_context.Developers, "Id", "Name", software.DeveloperId);
             return View(software);
         }
 
         // GET: Software/Edit/5
-        public async Task<IActionResult> Edit(int id)
+        public async Task<IActionResult> Edit(int id, int devId)
         {
             var software = await _context.Software.FindAsync(id);
+            ViewBag.DevId = devId;
             ViewBag.DeveloperList = new SelectList(_context.Developers, "Id", "Name", software.DeveloperId);
             return View(software);
         }
@@ -77,14 +82,23 @@ namespace Waresoft.Controllers
         // POST: Software/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Software software)
+        public async Task<IActionResult> Edit(Software software, int devId)
         {
+            ViewBag.DevId = devId;
+            bool duplicate = _context.Software.Any(s => s.Id != software.Id && s.DeveloperId == software.DeveloperId && s.Name.Equals(software.Name));
+
+            if (duplicate)
+            {
+                ModelState.AddModelError("Name", ERR_SOFT_EXISTS);
+            }
+
             if (ModelState.IsValid)
             {
                 _context.Update(software);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), new { id = devId });
             }
+
             ViewBag.DeveloperList = new SelectList(_context.Developers, "Id", "Name", software.DeveloperId);
             return View(software);
         }

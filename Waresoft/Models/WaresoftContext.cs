@@ -15,7 +15,6 @@ namespace Waresoft
         {
         }
 
-        public virtual DbSet<Comment> Comments { get; set; }
         public virtual DbSet<Country> Countries { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Developer> Developers { get; set; }
@@ -32,30 +31,6 @@ namespace Waresoft
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Comment>(entity =>
-            {
-                entity.Property(e => e.Id).HasColumnName("id");
-
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasColumnName("name")
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.Rating).HasColumnName("rating");
-
-                entity.Property(e => e.SoftwareId).HasColumnName("softwareId");
-
-                entity.Property(e => e.Text)
-                    .IsRequired()
-                    .HasColumnName("text")
-                    .HasColumnType("ntext");
-
-                entity.HasOne(d => d.Software)
-                    .WithMany(p => p.Comments)
-                    .HasForeignKey(d => d.SoftwareId)
-                    .HasConstraintName("FK_Comments_Software");
-            });
-
             modelBuilder.Entity<Country>(entity =>
             {
                 entity.Property(e => e.Id).HasColumnName("id");

@@ -10,7 +10,6 @@ namespace Waresoft
 
         public Software()
         {
-            Comments = new HashSet<Comment>();
             Purchases = new HashSet<Purchase>();
         }
 
@@ -38,7 +37,6 @@ namespace Waresoft
 
         [Display(Name = "Розробник")]
         public virtual Developer Developer { get; set; }
-        public virtual ICollection<Comment> Comments { get; set; }
         public virtual ICollection<Purchase> Purchases { get; set; }
     }
 }

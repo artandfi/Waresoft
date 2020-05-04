@@ -58,6 +58,8 @@ namespace Waresoft.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
+            ViewBag.CountryList = new SelectList(_context.Countries.ToList(), "Id", "Name");
             return View(developer);
         }
 
