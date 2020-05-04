@@ -28,8 +28,9 @@ namespace Waresoft.Controllers
         // GET: Developers/Details/5
         public async Task<IActionResult> Details(int id)
         {
-            var developers = await _context.Developers.FirstOrDefaultAsync(m => m.Id == id);
-            return View(developers);
+            var software = await _context.Software.Where(s => s.DeveloperId == id).Include("Comments").ToListAsync();
+            ViewBag.Developer = _context.Developers.Find(id).Name;
+            return View();
         }
 
         // GET: Developers/Create

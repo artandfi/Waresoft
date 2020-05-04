@@ -15,7 +15,8 @@ namespace Waresoft
         }
 
         public int Id { get; set; }
-        
+
+        [Display(Name = "Розробник")]
         public int DeveloperId { get; set; }
         
         [Required(ErrorMessage = ERR_REQ)]
@@ -35,6 +36,7 @@ namespace Waresoft
         [Display(Name = "Системні вимоги")]
         public string Requirements { get; set; }
 
+        [Display(Name = "Розробник")]
         public virtual Developer Developer { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
         public virtual ICollection<Purchase> Purchases { get; set; }
