@@ -113,7 +113,8 @@ else
 <table>
     <tr>
         <td>
-            <form method="get" asp-action="Create" asp-route-id="@ViewBag.DevId">
+            <form method="get" asp-action="Create">
+                <input type="hidden" name="devId" value="@ViewBag.DevId" />
                 <input type="submit" class="btn btn-success" value="Додати новий" />
             </form>
         </td>

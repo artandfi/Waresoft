@@ -54,7 +54,7 @@ namespace Waresoft.Controllers
         {
             if (ModelState.IsValid)
             {
-                var customer = await _context.Customers.FirstOrDefaultAsync(c => c.Email.Equals(model.Email));
+                var customer = await _context.Customers.FirstOrDefaultAsync(c => c.Name.Equals(model.Name) && c.Surname.Equals(model.Surname) && c.Email.Equals(model.Email));
                 if (customer == null)
                 {
                     customer = model;

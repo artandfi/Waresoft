@@ -39,11 +39,13 @@ namespace Waresoft.Controllers
         }
 
         // GET: Software/Create
-        public IActionResult Create(int id)
+        public IActionResult Create(int devId)
         {
-            ViewBag.DeveloperList = id == 0 ?
+            ViewBag.DevId = devId;
+            ViewBag.Developer = _context.Developers.Find(devId).Name;
+            ViewBag.DeveloperList = devId == 0 ?
                 new SelectList(_context.Developers, "Id", "Name") :
-                new SelectList(new List<Developer>() { _context.Developers.Find(id) });
+                new SelectList(new List<Developer>() { _context.Developers.Find(devId) }, "Id", "Name");
             return View();
         }
 
@@ -52,6 +54,9 @@ namespace Waresoft.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Software software)
         {
+            ViewBag.DevId = software.DeveloperId;
+            ViewBag.Developer = _context.Developers.Find(software.DeveloperId).Name;
+
             bool duplicate = _context.Software.Any(s => s.DeveloperId == software.DeveloperId && s.Name.Equals(software.Name));
 
             if (duplicate)
@@ -63,7 +68,7 @@ namespace Waresoft.Controllers
             {
                 _context.Add(software);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", new { id = software.DeveloperId });
             }
 
             ViewBag.DeveloperList = new SelectList(_context.Developers, "Id", "Name", software.DeveloperId);
