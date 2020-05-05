@@ -42,10 +42,13 @@ namespace Waresoft.Controllers
         public IActionResult Create(int devId)
         {
             ViewBag.DevId = devId;
-            ViewBag.Developer = _context.Developers.Find(devId).Name;
+            if (devId != 0)
+            {
+                ViewBag.Developer = _context.Developers.Find(devId).Name;
+            }
             ViewBag.DeveloperList = devId == 0 ?
-                new SelectList(_context.Developers, "Id", "Name") :
-                new SelectList(new List<Developer>() { _context.Developers.Find(devId) }, "Id", "Name");
+            new SelectList(_context.Developers, "Id", "Name") :
+            new SelectList(new List<Developer>() { _context.Developers.Find(devId) }, "Id", "Name");
             return View();
         }
 

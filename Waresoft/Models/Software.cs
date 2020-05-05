@@ -24,6 +24,7 @@ namespace Waresoft
         public string Name { get; set; }
 
         [Required(ErrorMessage = ERR_REQ)]
+        [RegularExpression(@"^[0-9]+(\.[0-9]{1,2})?$", ErrorMessage = "Введіть коректну вартість")]
         [Display(Name = "Вартість")]
         public decimal Price { get; set; }
 
