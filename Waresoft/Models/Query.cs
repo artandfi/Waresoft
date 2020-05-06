@@ -15,10 +15,16 @@ namespace Waresoft.Models
 
         public string DevName { get; set; }
 
+        public string CountryName { get; set; }
+
         public decimal AvgPrice { get; set; }
 
         public List<string> CustNames { get; set; }
 
         public List<string> CustSurnames { get; set; }
+
+        public List<string> ProdNames { get; set; }
+
+        public List<decimal> ProdPrices { get; set; }
     }
 }

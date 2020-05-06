@@ -53,3 +53,25 @@
     </div>
 </div>
 <hr />
+
+<p style="font-size:20px">
+    <b>Запит 3</b>
+</p>
+<p style="font-size:17px">
+    Знайти назви та ціни всіх програмних продуктів усіх розробників із країни К.
+</p>
+<div class="row">
+    <div class="col-md-4">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <form asp-action="SimpleQuery3">
+            <div class="form-group">
+                <label class="control-label">Назва країни К</label>
+                <select asp-for="CountryName" asp-items="@ViewBag.Countries" class="form-control"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Надіслати" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+<hr />
