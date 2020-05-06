@@ -8,9 +8,12 @@
 <hr />
 
 <h3>Прості</h3>
-<p style="font-size:15px">
+<hr />
+
+<p style="font-size:20px">
     <b>Запит 1</b>
-    <br />
+</p>
+<p style="font-size:17px">
     Знайти середню вартість програмних продуктів розробника на ймення P.
 </p>
 <div class="row">
@@ -27,3 +30,26 @@
         </form>
     </div>
 </div>
+<hr />
+
+<p style="font-size:20px">
+    <b>Запит 2</b>
+</p>
+<p style="font-size:17px">
+    Знайти імена та прізвища покупців, що придбали хоча б один програмний продукт розробника на ймення Р.
+</p>
+<div class="row">
+    <div class="col-md-4">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <form asp-action="SimpleQuery2">
+            <div class="form-group">
+                <label class="control-label">Ім'я розробника Р</label>
+                <select asp-for="DevName" asp-items="@ViewBag.DevNames" class="form-control"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Надіслати" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+<hr />

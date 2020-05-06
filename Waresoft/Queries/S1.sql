@@ -3,4 +3,4 @@ FROM Software
 WHERE Software.developerId IN
 	(SELECT Developers.id
 	 FROM Developers
-	 WHERE Developers.name = N'param');
+	 WHERE Developers.name = P);

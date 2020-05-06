@@ -15,6 +15,10 @@ namespace Waresoft.Controllers
     {
         private const string CONN_STR = "Server=ROOFLER\\SQLEXPRESS;Database=Waresoft;Trusted_Connection=True;MultipleActiveResultSets=true";
         private const string S1_PATH = @"D:\Женя\Студматериалы\2 КУРС\2 СЕМЕСТР\БД та ІС\Лаба 2\Waresoft\Waresoft\Queries\S1.sql";
+        private const string S2_PATH = @"D:\Женя\Студматериалы\2 КУРС\2 СЕМЕСТР\БД та ІС\Лаба 2\Waresoft\Waresoft\Queries\S2.sql";
+
+        private const string ERR_AVG = "Неможливо обрахувати середню ціну, оскільки продукти відсутні.";
+        private const string ERR_CUST = "Покупці, що задовольняють дану умову, відсутні.";
 
         private readonly WaresoftContext _context;
 
@@ -36,7 +40,7 @@ namespace Waresoft.Controllers
         public IActionResult SimpleQuery1(Query queryModel)
         {
             string query = System.IO.File.ReadAllText(S1_PATH);
-            query = query.Replace("N\'param\'", "N\'" + queryModel.DevName + "\'");
+            query = query.Replace("P", "N\'" + queryModel.DevName + "\'");
             query = query.Replace("\r\n", " ");
             query = query.Replace('\t', ' ');
 
@@ -45,21 +49,61 @@ namespace Waresoft.Controllers
             using (var connection = new SqlConnection(CONN_STR))
             {
                 connection.Open();
-                try
+                using (var command = new SqlCommand(query, connection))
                 {
-                    using (var command = new SqlCommand(query, connection))
+                    var result = command.ExecuteScalar();
+                    if (result != DBNull.Value)
                     {
-                        queryModel.AvgPrice = Convert.ToDecimal(command.ExecuteScalar());
+                        queryModel.AvgPrice = Convert.ToDecimal(result);
+                    }
+                    else
+                    {
+                        queryModel.ErrorFlag = 1;
+                        queryModel.Error = ERR_AVG;
                     }
                 }
-                catch (Exception ex)
+                connection.Close();
+            }
+            return RedirectToAction("Result", queryModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult SimpleQuery2(Query queryModel)
+        {
+            string query = System.IO.File.ReadAllText(S2_PATH);
+            query = query.Replace("X", "N\'" + queryModel.DevName + "\'");
+            query = query.Replace("\r\n", " ");
+            query = query.Replace('\t', ' ');
+
+            queryModel.QueryId = "S2";
+            queryModel.CustNames = new List<string>();
+            queryModel.CustSurnames = new List<string>();
+
+            using (var connection = new SqlConnection(CONN_STR))
+            {
+                connection.Open();
+                using (var command = new SqlCommand(query, connection))
                 {
-                    throw new Exception(ex.Message, ex);
+                    command.ExecuteNonQuery();
+                    using (var reader = command.ExecuteReader())
+                    {
+                        int flag = 0;
+                        while (reader.Read())
+                        {
+                            queryModel.CustNames.Add(reader.GetString(0));
+                            queryModel.CustSurnames.Add(reader.GetString(1));
+                            flag++;
+                        }
+
+                        if (flag == 0)
+                        {
+                            queryModel.ErrorFlag = 1;
+                            queryModel.Error = ERR_CUST;
+                        }
+                    }
                 }
-                finally
-                {
-                    connection.Close();
-                }
+                connection.Close();
             }
             return RedirectToAction("Result", queryModel);
         }
