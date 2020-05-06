@@ -169,3 +169,6 @@ D:\Женя\Студматериалы\2 КУРС\2 СЕМЕСТР\БД та І�
 D:\Женя\Студматериалы\2 КУРС\2 СЕМЕСТР\БД та ІС\Лаба 2\Waresoft\Waresoft\obj\Debug\netcoreapp3.1\Razor\Views\Purchases\Purchase.cshtml.g.cs
 D:\Женя\Студматериалы\2 КУРС\2 СЕМЕСТР\БД та ІС\Лаба 2\Waresoft\Waresoft\obj\Debug\netcoreapp3.1\Razor\Views\Customers\Index.cshtml.g.cs
 D:\Женя\Студматериалы\2 КУРС\2 СЕМЕСТР\БД та ІС\Лаба 2\Waresoft\Waresoft\obj\Debug\netcoreapp3.1\Razor\Views\Purchases\Index.cshtml.g.cs
+D:\Женя\Студматериалы\2 КУРС\2 СЕМЕСТР\БД та ІС\Лаба 2\Waresoft\Waresoft\obj\Debug\netcoreapp3.1\Razor\Views\Queries\Query1.cshtml.g.cs
+D:\Женя\Студматериалы\2 КУРС\2 СЕМЕСТР\БД та ІС\Лаба 2\Waresoft\Waresoft\obj\Debug\netcoreapp3.1\Razor\Views\Queries\Index.cshtml.g.cs
+D:\Женя\Студматериалы\2 КУРС\2 СЕМЕСТР\БД та ІС\Лаба 2\Waresoft\Waresoft\obj\Debug\netcoreapp3.1\Razor\Views\Queries\Result.cshtml.g.cs

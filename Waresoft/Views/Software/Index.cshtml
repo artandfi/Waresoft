@@ -118,6 +118,17 @@ else
                 <input type="submit" class="btn btn-success" value="Додати новий" />
             </form>
         </td>
+        @if (ViewBag.DevId != 0)
+        {
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+                <form method="get" asp-controller="Developers" asp-action="Index">
+                    <input type="submit" class="btn btn-primary" value="Назад до списку розробників" />
+                </form>
+            </td>
+        }
         <td></td>
         <td></td>
         <td></td>
