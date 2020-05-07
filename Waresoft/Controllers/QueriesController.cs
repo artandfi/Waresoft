@@ -17,10 +17,14 @@ namespace Waresoft.Controllers
         private const string S1_PATH = @"D:\Женя\Студматериалы\2 КУРС\2 СЕМЕСТР\БД та ІС\Лаба 2\Waresoft\Waresoft\Queries\S1.sql";
         private const string S2_PATH = @"D:\Женя\Студматериалы\2 КУРС\2 СЕМЕСТР\БД та ІС\Лаба 2\Waresoft\Waresoft\Queries\S2.sql";
         private const string S3_PATH = @"D:\Женя\Студматериалы\2 КУРС\2 СЕМЕСТР\БД та ІС\Лаба 2\Waresoft\Waresoft\Queries\S3.sql";
+        private const string S4_PATH = @"D:\Женя\Студматериалы\2 КУРС\2 СЕМЕСТР\БД та ІС\Лаба 2\Waresoft\Waresoft\Queries\S4.sql";
+        private const string S5_PATH = @"D:\Женя\Студматериалы\2 КУРС\2 СЕМЕСТР\БД та ІС\Лаба 2\Waresoft\Waresoft\Queries\S5.sql";
+        private const string S6_PATH = @"D:\Женя\Студматериалы\2 КУРС\2 СЕМЕСТР\БД та ІС\Лаба 2\Waresoft\Waresoft\Queries\S6.sql";
 
         private const string ERR_AVG = "Неможливо обрахувати середню ціну, оскільки продукти відсутні.";
         private const string ERR_CUST = "Покупці, що задовольняють дану умову, відсутні.";
         private const string ERR_PROD = "Програмні продукти, що задовольняють дану умову, відсутні.";
+        private const string ERR_DEV = "Розробнкии, що задовольняють дану умову, відсутні.";
 
         private readonly WaresoftContext _context;
 
@@ -29,10 +33,23 @@ namespace Waresoft.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int errorCode)
         {
+            if (errorCode == 1)
+            {
+                ViewBag.ErrorFlag = 1;
+                ViewBag.PriceError = "Введіть коректну вартість";
+            }
+            if (errorCode == 2)
+            {
+                ViewBag.ErrorFlag = 2;
+                ViewBag.ProdNameError = "Поле необхідно заповнити";
+            }
             ViewBag.DevNames = new SelectList(_context.Developers, "Name", "Name");
             ViewBag.Countries = new SelectList(_context.Countries, "Name", "Name");
+            ViewBag.CustNames = new SelectList(_context.Customers, "Name", "Name");
+            ViewBag.CustSurnames = new SelectList(_context.Customers, "Surname", "Surname");
+            ViewBag.CustEmails = new SelectList(_context.Customers, "Email", "Email");
             return View();
         }
 
@@ -147,6 +164,128 @@ namespace Waresoft.Controllers
                 connection.Close();
             }
             return RedirectToAction("Result", queryModel);
+        }
+
+        public IActionResult SimpleQuery4(Query queryModel)
+        {
+            string query = System.IO.File.ReadAllText(S4_PATH);
+            query = query.Replace("X", "N\'" + queryModel.CustName + "\'");
+            query = query.Replace("Y", "N\'" + queryModel.CustSurname + "\'");
+            query = query.Replace("Z", "N\'" + queryModel.CustEmail + "\'");
+            query = query.Replace("\r\n", " ");
+            query = query.Replace('\t', ' ');
+
+            queryModel.QueryId = "S4";
+            queryModel.DevNames = new List<string>();
+
+            using (var connection = new SqlConnection(CONN_STR))
+            {
+                connection.Open();
+                using (var command = new SqlCommand(query, connection))
+                {
+                    command.ExecuteNonQuery();
+                    using (var reader = command.ExecuteReader())
+                    {
+                        int flag = 0;
+                        while (reader.Read())
+                        {
+                            queryModel.DevNames.Add(reader.GetString(0));
+                            flag++;
+                        }
+
+                        if (flag == 0)
+                        {
+                            queryModel.ErrorFlag = 1;
+                            queryModel.Error = ERR_DEV;
+                        }
+                    }
+                }
+                connection.Close();
+            }
+            return RedirectToAction("Result", queryModel);
+        }
+
+        public IActionResult SimpleQuery5(Query queryModel)
+        {
+            if (ModelState.IsValid)
+            {
+                string query = System.IO.File.ReadAllText(S5_PATH);
+                query = query.Replace("P", queryModel.Price.ToString());
+                query = query.Replace("\r\n", " ");
+                query = query.Replace('\t', ' ');
+
+                queryModel.QueryId = "S5";
+                queryModel.DevNames = new List<string>();
+
+                using (var connection = new SqlConnection(CONN_STR))
+                {
+                    connection.Open();
+                    using (var command = new SqlCommand(query, connection))
+                    {
+                        command.ExecuteNonQuery();
+                        using (var reader = command.ExecuteReader())
+                        {
+                            int flag = 0;
+                            while (reader.Read())
+                            {
+                                queryModel.DevNames.Add(reader.GetString(0));
+                                flag++;
+                            }
+
+                            if (flag == 0)
+                            {
+                                queryModel.ErrorFlag = 1;
+                                queryModel.Error = ERR_DEV;
+                            }
+                        }
+                    }
+                    connection.Close();
+                }
+                return RedirectToAction("Result", queryModel);
+            }
+
+            return RedirectToAction("Index", new { errorCode = 1 });
+        }
+
+        public IActionResult SimpleQuery6(Query queryModel)
+        {
+            if (ModelState.IsValid)
+            {
+                string query = System.IO.File.ReadAllText(S6_PATH);
+                query = query.Replace("X", "N\'" + queryModel.ProdName + "\'");
+                query = query.Replace("\r\n", " ");
+                query = query.Replace('\t', ' ');
+                queryModel.QueryId = "S6";
+                queryModel.DevNames = new List<string>();
+
+                using (var connection = new SqlConnection(CONN_STR))
+                {
+                    connection.Open();
+                    using (var command = new SqlCommand(query, connection))
+                    {
+                        command.ExecuteNonQuery();
+                        using (var reader = command.ExecuteReader())
+                        {
+                            int flag = 0;
+                            while (reader.Read())
+                            {
+                                queryModel.DevNames.Add(reader.GetString(0));
+                                flag++;
+                            }
+
+                            if (flag == 0)
+                            {
+                                queryModel.ErrorFlag = 1;
+                                queryModel.Error = ERR_DEV;
+                            }
+                        }
+                    }
+                    connection.Close();
+                }
+                return RedirectToAction("Result", queryModel);
+            }
+
+            return RedirectToAction("Index", new { errorCode = 2 });
         }
 
         public IActionResult Result(Query queryResult)

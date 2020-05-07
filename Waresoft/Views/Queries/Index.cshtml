@@ -75,3 +75,109 @@
     </div>
 </div>
 <hr />
+
+<p style="font-size:20px">
+    <b>Запит 4</b>
+</p>
+<p style="font-size:17px">
+    Знайти імена розробників усіх програмних продуктів, придбаних покупцем з іменем І, прізвищем П та email-ом Е.
+</p>
+<div class="row">
+    <div class="col-md-4">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <form asp-action="SimpleQuery4">
+            <div class="form-group">
+                <label class="control-label">Ім'я покупця І</label>
+                <select asp-for="CustName" asp-items="@ViewBag.CustNames" class="form-control"></select>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Прізвище покупця П</label>
+                <select asp-for="CustSurname" asp-items="@ViewBag.CustSurnames" class="form-control"></select>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Email покупця Е</label>
+                <select asp-for="CustEmail" asp-items="@ViewBag.CustEmails" class="form-control"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Надіслати" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+<hr />
+
+<p style="font-size:20px">
+    <b>Запит 5</b>
+</p>
+<p style="font-size:17px">
+    Знайти імена розробників, які продають продукти вартістю не В у.о.
+</p>
+<div class="row">
+    <div class="col-md-4">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <form asp-action="SimpleQuery5">
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input maxlength="28" id="price" asp-for="Price" class="form-control" />
+                <span class="text-danger">@ViewBag.PriceError</span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Надіслати" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+<hr />
+
+<p style="font-size:20px">
+    <b>Запит 6</b>
+</p>
+<p style="font-size:17px">
+    Знайти імена розробників, які не продають продукти з назвою Н.
+</p>
+<div class="row">
+    <div class="col-md-4">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <form asp-action="SimpleQuery6">
+            <div class="form-group">
+                <label class="control-label">Назва Н</label>
+                <input maxlength="50" asp-for="ProdName" class="form-control" id="prodName" />
+                <span class="text-danger">@ViewBag.ProdNameError</span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Надіслати" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+<hr />
+
+<h3>Множинні</h3>
+<hr />
+
+<p style="font-size:20px">
+    <b>Запит 1</b>
+</p>
+<p style="font-size:17px">
+    Знайти назви країн, розробники з яких продають програмні продукти принаймні за всіма тими цінами, що й розробник із кодом К.
+</p>
+
+
+
+
+
+
+
+@section scripts
+{
+    <script>
+        window.addEventListener("load", function () {
+            if ('@ViewBag.ErrorFlag' == 1) {
+                document.getElementById("price").scrollIntoView();
+            }
+            else if ('@ViewBag.ErrorFlag' == 2) {
+                document.getElementById("prodName").scrollIntoView();
+            }
+        });
+    </script>
+}

@@ -77,6 +77,81 @@
             </tbody>
         </table>
     }
+    else if (Model.QueryId.Equals("S4"))
+    {
+        <p style="font-size:20px">
+            <b>Імена розробників усіх програмних продуктів, придбаних покупцем з ім'ям @Model.CustName, прізвищем @Model.CustSurname та email-ом @Model.CustEmail</b>
+        </p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Ім'я/назва
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.DevNames.Count; i++)
+                {
+                    <tr>
+                        <td>
+                            @Model.DevNames[i]
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else if (Model.QueryId.Equals("S5"))
+    {
+        <p style="font-size:20px">
+            <b>Імена розробників, які продають продукти ціною не @Model.Price у.о.</b>
+        </p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Ім'я/назва
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.DevNames.Count; i++)
+                {
+                    <tr>
+                        <td>
+                            @Model.DevNames[i]
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else if (Model.QueryId.Equals("S6"))
+    {
+        <p style="font-size:20px">
+            <b>Імена розробників, які не продають продукти з назвою @Model.ProdName</b>
+        </p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Ім'я/назва
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.DevNames.Count; i++)
+                {
+                    <tr>
+                        <td>
+                            @Model.DevNames[i]
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
 }
 else
 {

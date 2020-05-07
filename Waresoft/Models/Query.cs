@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -26,5 +27,21 @@ namespace Waresoft.Models
         public List<string> ProdNames { get; set; }
 
         public List<decimal> ProdPrices { get; set; }
+
+        public string CustName { get; set; }
+
+        public string CustSurname { get; set; }
+
+        public string CustEmail { get; set; }
+
+        public List<string> DevNames { get; set; }
+
+        [Required(ErrorMessage = "Поле необхідно заповнити")]
+        [RegularExpression(@"^[0-9]+(\.[0-9]{1,2})?$", ErrorMessage = "Введіть коректну вартість")]
+        [Display(Name = "Вартість В")]
+        public decimal Price { get; set; }
+
+        [Required(ErrorMessage = "Поле необхідно заповнити")]
+        public string ProdName { get; set; }
     }
 }
