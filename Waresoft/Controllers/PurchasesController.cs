@@ -52,9 +52,16 @@ namespace Waresoft.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Purchase(Customer model, int softwareId, int devId)
         {
-            if (ModelState.IsValid)
+            var customer = await _context.Customers.FirstOrDefaultAsync(c => c.Email.Equals(model.Email));
+            bool duplicate = customer == null ? false : _context.Purchases.Any(p => p.SoftwareId == softwareId && p.CustomerId == customer.Id);
+
+            if (duplicate)
             {
-                var customer = await _context.Customers.FirstOrDefaultAsync(c => c.Name.Equals(model.Name) && c.Surname.Equals(model.Surname) && c.Email.Equals(model.Email));
+                ModelState.AddModelError("Email", "Ви вже придбали цей продукт");
+            }
+
+            if (ModelState.IsValid)
+            {                
                 if (customer == null)
                 {
                     customer = model;

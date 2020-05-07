@@ -34,9 +34,18 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Customers" asp-action="Index">Покупці</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Purchases" asp-action="Index">Покупки</a>
-                        </li>
+                        @if (ViewBag.CustomerId != 0)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Purchases" asp-action="Index" asp-route-id="0">Покупки</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Purchases" asp-action="Index">Покупки</a>
+                            </li>
+                        }
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Queries" asp-action="Index">Запити</a>
                         </li>

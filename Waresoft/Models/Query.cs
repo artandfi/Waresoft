@@ -24,6 +24,8 @@ namespace Waresoft.Models
 
         public List<string> CustSurnames { get; set; }
 
+        public List<string> CustEmails { get; set; }
+
         public List<string> ProdNames { get; set; }
 
         public List<decimal> ProdPrices { get; set; }
@@ -43,5 +45,9 @@ namespace Waresoft.Models
 
         [Required(ErrorMessage = "Поле необхідно заповнити")]
         public string ProdName { get; set; }
+
+        public int DevId { get; set; }
+
+        public List<string> CountryNames { get; set; }
     }
 }

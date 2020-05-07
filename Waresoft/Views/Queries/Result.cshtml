@@ -152,6 +152,87 @@
             </tbody>
         </table>
     }
+    else if (Model.QueryId.Equals("A1"))
+    {
+        <p style="font-size:20px">
+            <b>Назви країн, розробники з яких продають програмні продукти принаймні за всіма тими цінами, що й розробник із кодом @Model.DevId</b>
+        </p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Назва
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.CountryNames.Count; i++)
+                {
+                    <tr>
+                        <td>
+                            @Model.CountryNames[i]
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else if (Model.QueryId.Equals("A2"))
+    {
+        <p style="font-size:20px">
+            <b>Прізвища покупців, які придбали точно ті ж самі програмні продукти, що й покупець з email @Model.CustEmail</b>
+        </p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Прізвище
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.CustSurnames.Count; i++)
+                {
+                    <tr>
+                        <td>
+                            @Model.CustSurnames[i]
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else if (Model.QueryId.Equals("A3"))
+    {
+        <p style="font-size:20px">
+            <b>Прізвища та email-и покупців з іменем @Model.CustName, які придбали всі наявні програмні продукти.</b>
+        </p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Прізвище
+                    </th>
+                    <th>
+                        Email
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.CustSurnames.Count; i++)
+                {
+                    <tr>
+                        <td>
+                            @Model.CustSurnames[i]
+                        </td>
+                        <td>
+                            @Model.CustEmails[i]
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
 }
 else
 {
