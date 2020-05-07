@@ -20,6 +20,8 @@
     <div class="col-md-4">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <form asp-action="SimpleQuery1">
+            <input type="hidden" asp-for="ProdName" value="dummy" />
+            <input type="hidden" asp-for="Price" value="0" />
             <div class="form-group">
                 <label class="control-label">Ім'я розробника Р</label>
                 <select asp-for="DevName" asp-items="@ViewBag.DevNames" class="form-control"></select>
@@ -42,6 +44,8 @@
     <div class="col-md-4">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <form asp-action="SimpleQuery2">
+            <input type="hidden" asp-for="ProdName" value="dummy" />
+            <input type="hidden" asp-for="Price" value="0" />
             <div class="form-group">
                 <label class="control-label">Ім'я розробника Р</label>
                 <select asp-for="DevName" asp-items="@ViewBag.DevNames" class="form-control"></select>
@@ -64,6 +68,8 @@
     <div class="col-md-4">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <form asp-action="SimpleQuery3">
+            <input type="hidden" asp-for="ProdName" value="dummy" />
+            <input type="hidden" asp-for="Price" value="0" />
             <div class="form-group">
                 <label class="control-label">Назва країни К</label>
                 <select asp-for="CountryName" asp-items="@ViewBag.Countries" class="form-control"></select>
@@ -86,9 +92,11 @@
     <div class="col-md-4">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <form asp-action="SimpleQuery4">
+            <input type="hidden" asp-for="ProdName" value="dummy" />
+            <input type="hidden" asp-for="Price" value="0" />
             <div class="form-group">
                 <label class="control-label">Ім'я покупця І</label>
-                <select asp-for="CustName" asp-items="@ViewBag.CustNames" class="form-control"></select>
+                <select id="q4" asp-for="CustName" asp-items="@ViewBag.CustNames" class="form-control"></select>
             </div>
             <div class="form-group">
                 <label class="control-label">Прізвище покупця П</label>
@@ -107,7 +115,7 @@
 <hr />
 
 <p style="font-size:20px">
-    <b>Запит 5</b>
+    <b id="q5">Запит 5</b>
 </p>
 <p style="font-size:17px">
     Знайти імена розробників, які продають продукти вартістю не В у.о.
@@ -116,13 +124,14 @@
     <div class="col-md-4">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <form asp-action="SimpleQuery5">
+            <input type="hidden" asp-for="ProdName" value="dummy"/>
             <div class="form-group">
                 <label asp-for="Price" class="control-label"></label>
-                <input maxlength="28" id="price" asp-for="Price" class="form-control" />
+                <input maxlength="28" id="price" asp-for="Price" class="form-control"/>
                 <span class="text-danger">@ViewBag.PriceError</span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Надіслати" class="btn btn-success" />
+                <input type="submit" value="Надіслати" class="btn btn-success" onclick="submit5()"/>
             </div>
         </form>
     </div>
@@ -139,6 +148,7 @@
     <div class="col-md-4">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <form asp-action="SimpleQuery6">
+            <input type="hidden" asp-for="Price" value="0" />
             <div class="form-group">
                 <label class="control-label">Назва Н</label>
                 <input maxlength="50" asp-for="ProdName" class="form-control" id="prodName" />
@@ -165,6 +175,8 @@
     <div class="col-md-4">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <form asp-action="AdvancedQuery1">
+            <input type="hidden" asp-for="ProdName" value="dummy" />
+            <input type="hidden" asp-for="Price" value="0" />
             <div class="form-group">
                 <label class="control-label">Код розробника К</label>
                 <select asp-for="DevId" asp-items="@ViewBag.DevIds" class="form-control"></select>
@@ -187,6 +199,8 @@
     <div class="col-md-4">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <form asp-action="AdvancedQuery2">
+            <input type="hidden" asp-for="ProdName" value="dummy" />
+            <input type="hidden" asp-for="Price" value="0" />
             <div class="form-group">
                 <label class="control-label">Email E</label>
                 <select asp-for="CustEmail" asp-items="@ViewBag.CustEmails" class="form-control"></select>
@@ -209,6 +223,8 @@
     <div class="col-md-4">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <form asp-action="AdvancedQuery3">
+            <input type="hidden" asp-for="ProdName" value="dummy" />
+            <input type="hidden" asp-for="Price" value="0" />
             <div class="form-group">
                 <label class="control-label">Ім'я І</label>
                 <select asp-for="CustName" asp-items="@ViewBag.CustNames" class="form-control"></select>
@@ -230,10 +246,10 @@
     <script>
         window.addEventListener("load", function () {
             if ('@ViewBag.ErrorFlag' == 1) {
-                document.getElementById("price").scrollIntoView();
+                document.getElementById("q4").scrollIntoView();
             }
             else if ('@ViewBag.ErrorFlag' == 2) {
-                document.getElementById("prodName").scrollIntoView();
+                document.getElementById("q5").scrollIntoView();
             }
         });
     </script>

@@ -20,11 +20,16 @@ namespace Waresoft.Controllers
         }
 
         // GET: Software
-        public async Task<IActionResult> Index(int id)
+        public async Task<IActionResult> Index(int id, bool purchased)
         {
             List<Software> software;
             ViewBag.DevId = id;
             
+            if (purchased)
+            {
+                ViewBag.Purchased = 1;
+            }
+
             if (id == 0)
             {
                 software = await _context.Software.Include(s => s.Developer).ToListAsync();

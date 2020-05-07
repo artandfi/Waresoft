@@ -263,7 +263,6 @@ namespace Waresoft.Controllers
                 }
                 return RedirectToAction("Result", queryModel);
             }
-
             return RedirectToAction("Index", new { errorCode = 1 });
         }
 

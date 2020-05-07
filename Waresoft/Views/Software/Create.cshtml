@@ -81,12 +81,7 @@
 @section Scripts
 {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    
-    <script>
-        function yes() {
-            $("#confirm").modal('hide');
-        }
-    </script>
+
     <script>
         $(function () {
             $('#price').keypress(function (e) {

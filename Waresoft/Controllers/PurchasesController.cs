@@ -72,7 +72,7 @@ namespace Waresoft.Controllers
                 var purchase = new Purchase() { CustomerId = customer.Id, SoftwareId = softwareId, Date = DateTime.Now };
                 await _context.Purchases.AddAsync(purchase);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Index", "Software", new { id = devId });
+                return RedirectToAction("Index", "Software", new { id = devId, purchased = true });
             }
 
             FillViewBag(softwareId, devId);
