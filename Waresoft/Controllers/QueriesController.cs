@@ -26,11 +26,13 @@ namespace Waresoft.Controllers
         private const string A2_PATH = @"D:\Женя\Студматериалы\2 КУРС\2 СЕМЕСТР\БД та ІС\Лаба 2\Waresoft\Waresoft\Queries\A2.sql";
         private const string A3_PATH = @"D:\Женя\Студматериалы\2 КУРС\2 СЕМЕСТР\БД та ІС\Лаба 2\Waresoft\Waresoft\Queries\A3.sql";
 
+        private const string T1_PATH = @"D:\Женя\Студматериалы\2 КУРС\2 СЕМЕСТР\БД та ІС\Лаба 2\Waresoft\Waresoft\Queries\T1.sql";
+        private const string T2_PATH = @"D:\Женя\Студматериалы\2 КУРС\2 СЕМЕСТР\БД та ІС\Лаба 2\Waresoft\Waresoft\Queries\T2.sql";
 
         private const string ERR_AVG = "Неможливо обрахувати середню ціну, оскільки продукти відсутні.";
         private const string ERR_CUST = "Покупці, що задовольняють дану умову, відсутні.";
         private const string ERR_PROD = "Програмні продукти, що задовольняють дану умову, відсутні.";
-        private const string ERR_DEV = "Розробнкии, що задовольняють дану умову, відсутні.";
+        private const string ERR_DEV = "Розробники, що задовольняють дану умову, відсутні.";
         private const string ERR_COUNTRY = "Країни, що задовольняють дану умову, відсутні.";
         
         private readonly WaresoftContext _context;
@@ -421,6 +423,16 @@ namespace Waresoft.Controllers
                 connection.Close();
             }
             return RedirectToAction("Result", queryModel);
+        }
+
+        public IActionResult TeacherQuery1(Query queryModel)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IActionResult TeacherQuery2(Query queryModel)
+        {
+            throw new NotImplementedException();
         }
 
         public IActionResult Result(Query queryResult)

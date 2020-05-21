@@ -237,6 +237,56 @@
 </div>
 <hr />
 
+<div class="container" style="display:none">
+    <h3>Запити від викладача</h3>
+    <hr />
+
+    <p style="font-size:20px;">
+        <b>Запит 1</b>
+    </p>
+    <p style="font-size:17px">
+        Знайти ..
+    </p>
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="TeacherQuery1">
+                <input type="hidden" asp-for="ProdName" value="dummy" />
+                <input type="hidden" asp-for="Price" value="0" />
+                <div class="form-group">
+
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Надіслати" class="btn btn-success" />
+                </div>
+            </form>
+        </div>
+    </div>
+    <hr />
+
+    <p style="font-size:20px;">
+        <b>Запит 2</b>
+    </p>
+    <p style="font-size:17px">
+        Знайти ..
+    </p>
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="TeacherQuery2">
+                <input type="hidden" asp-for="ProdName" value="dummy" />
+                <input type="hidden" asp-for="Price" value="0" />
+                <div class="form-group">
+
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Надіслати" class="btn btn-success" />
+                </div>
+            </form>
+        </div>
+    </div>
+    <hr />
+</div>
+
+
 <form method="get" asp-controller="Home" asp-action="Index">
     <input type="submit" class="btn btn-primary" value="На головну" />
 </form>
